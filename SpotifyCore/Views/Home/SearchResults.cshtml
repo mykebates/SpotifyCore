@@ -1,0 +1,86 @@
+﻿@using SpotifyCore.Models
+@model SpotifySearch
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+
+<div id="results" class="active">
+    <ul class="albums">
+        <div>
+            <div class="title-wrap">
+                <p>albums</p>
+            </div>
+            <div class="show-more-wrap"><a href="javascript:void(0)">SHOW MORE</a></div>
+        </div>
+
+        @foreach (var album in Model.albums.items)
+        {
+            <li>
+                <figure>
+                    <div>
+                        <a href="https://open.spotify.com/album/@album.id" target="_blank"><img src="@album.images.FirstOrDefault()?.url"></a>
+                    </div>
+                </figure>
+                <div>
+                    <p class="item-title"><a target="_blank" href="https://open.spotify.com/album/@album.id">@album.name</a></p>
+                    <p class="item-subtitle">album</p>
+                    <a href="https://open.spotify.com/album/@album.id" target="_blank"></a>
+                </div>
+            </li>
+        }
+    </ul>
+    <ul class="artists">
+        <div>
+            <div class="title-wrap">
+                <p>artists</p>
+            </div>
+            <div class="show-more-wrap"><a href="javascript:void(0)">SHOW MORE</a></div>
+        </div>
+
+        @foreach (var artist in Model.artists.items)
+        {
+            <li>
+                <figure>
+                    <div>
+                        <a href="https://open.spotify.com/artist/@artist.id" target="_blank"><img src="@artist.images.FirstOrDefault()?.url"></a>
+                    </div>
+                </figure>
+                <div>
+                    <p class="item-title"><a target="_blank" href="https://open.spotify.com/artist/@artist.id">@artist.name</a></p>
+                    <p class="item-subtitle">@artist.followers.total listeners</p>
+                    <a href="https://open.spotify.com/artist/@artist.id" target="_blank"></a>
+                </div>
+            </li>
+
+        }
+
+    </ul>
+    <ul class="tracks">
+        <div>
+            <div class="title-wrap">
+                <p>tracks</p>
+            </div>
+            <div class="show-more-wrap"><a href="javascript:void(0)">SHOW MORE</a></div>
+        </div>
+
+        @foreach (var track in Model.tracks.items)
+        {
+            <li>
+                <figure>
+                    <div>
+                        <a href="@track.preview_url" target="_blank" class="play_trigger"><img src="@track.album.images.FirstOrDefault()?.url"></a>
+                    </div>
+                </figure>
+                <div>
+                    <p class="item-title"><a target="_blank" href="@track.preview_url" class="play_trigger">@track.name</a></p>
+                    <p class="item-subtitle"><a target="_blank" href="#">@track.artists.FirstOrDefault().name</a> • <a target="_blank" href="#">@track.album.name</a></p>
+                    <a href="@track.preview_url" target="_blank" class="play_trigger"></a>
+                </div>
+            </li>
+        }
+        
+
+    </ul>
+</div>

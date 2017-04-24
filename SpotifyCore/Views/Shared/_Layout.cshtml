@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SpotifyCore</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+
+    <div class="main inactive">
+        <div class="bg-main"></div>
+        <section class="search">
+            <div class="search-box">
+                <div class="introduction-text">
+                    <h1>Search over 200 million songs.</h1>
+                    <p>Know what you want to listen to? Just search and hit play.</p>
+                </div>
+                <div class="cancel"></div>
+                <form class="search-form" action="/home/searchresults">
+                    <div class="query-box">
+                        <input class="query-input" type="text" autocomplete="off" name="search" placeholder="e.g. 'foals', 'queen'">
+                        @RenderBody()
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <audio id="audio"></audio>
+
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
